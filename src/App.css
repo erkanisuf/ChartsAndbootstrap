@@ -1,7 +1,10 @@
 .App {
   text-align: center;
 }
-
+.customtooltip {
+  border: 5px solid black;
+  background-color: green;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
