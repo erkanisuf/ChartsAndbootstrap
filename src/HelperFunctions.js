@@ -4,8 +4,8 @@ export const createDataSetForCharts = (data) => {
   let newDeaths = [];
   if (data.length) {
     data.map((el) => {
-      const confirmed = { x: el.Date, y: el.NewConfirmed };
-      const deaths = { x: el.Date, y: el.NewDeaths };
+      const confirmed = { x: el.Date, y: el.NewConfirmed, custom: 69 };
+      const deaths = { x: el.Date, y: el.NewDeaths, custom: 69 };
       labels.push(el.Date);
       newConfirmed.push(confirmed);
       newDeaths.push(deaths);

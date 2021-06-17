@@ -11,7 +11,7 @@ export const CustomTooltop = (context) => {
 
     document.body.appendChild(tooltipEl);
   }
-
+  console.log(context.tooltip.dataPoints[0].raw); // if custom obj with cusotm data
   // Hide if no tooltip
   let tooltipModel = context.tooltip;
   if (tooltipModel.opacity === 0) {
@@ -36,7 +36,7 @@ export const CustomTooltop = (context) => {
   if (tooltipModel.body) {
     let titleLines = tooltipModel.title || [];
     let bodyLines = tooltipModel.body.map(getBody);
-    console.log(tooltipModel, "NEw");
+
     let innerHtml = "<thead>";
 
     titleLines.forEach(function (title) {
@@ -52,7 +52,7 @@ export const CustomTooltop = (context) => {
       let span = '<span style="' + style + '"></span>';
       innerHtml += "<tr><td>" + span + body + "</td></tr>";
       innerHtml +=
-        "<tr><td>" + span + someExampleFunctionMayBe() + "</td></tr>";
+        "<tr><td>" + span + someExampleFunctionMayBe(context) + "</td></tr>";
     });
     innerHtml += "</tbody>";
 
@@ -74,14 +74,18 @@ export const CustomTooltop = (context) => {
     position.left + window.pageXOffset + tooltipModel.caretX + "px";
   tooltipEl.style.top =
     tooltipModel.caretY < 150
-      ? position.top + window.pageYOffset + tooltipModel.caretY + 100 + "px"
+      ? position.top +
+        window.pageYOffset +
+        tooltipModel.caretY +
+        tooltipModel.caretY / 2 +
+        "px"
       : position.top + window.pageYOffset + tooltipModel.caretY + "px";
 
   tooltipEl.style.padding =
     tooltipModel.padding + "px " + tooltipModel.padding + "px";
-  tooltipEl.style.pointerEvents = "none";
+  //   tooltipEl.style.pointerEvents = "none";
 };
 
-const someExampleFunctionMayBe = () => {
-  return "Migh add extra info maybe";
+const someExampleFunctionMayBe = (context) => {
+  return context.tooltip.dataPoints[0].raw.x;
 };

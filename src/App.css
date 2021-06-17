@@ -4,6 +4,7 @@
 .customtooltip {
   border: 5px solid black;
   background-color: green;
+  cursor: pointer;
 }
 .App-logo {
   height: 40vmin;

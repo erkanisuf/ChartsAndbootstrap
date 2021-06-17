@@ -20,6 +20,7 @@ function App() {
   }, []);
   const options = {
     responsive: true,
+    parsing: { yAxisKey: "custom" }, // this with parsing so migh use custom objects
     scales: {
       x: {
         type: "time",
@@ -36,7 +37,13 @@ function App() {
         },
       },
     },
+
     plugins: {
+      legend: {
+        onHover: function (e) {
+          e.target.style.cursor = "pointer";
+        },
+      },
       tooltip: {
         external: (context) => {
           CustomTooltop(context);
