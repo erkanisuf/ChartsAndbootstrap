@@ -5,13 +5,15 @@ import { Doughnut, Line, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { createDataSetForCharts } from "./HelperFunctions";
 import "chartjs-adapter-moment";
+import moment from "moment";
 import { CustomTooltop } from "./CustomTooltip";
+import DailyChart from "./components/Charts/DailyChart";
 // Chart.defaults.plugins.tooltip = false;
 function App() {
   const [dataState, setDataState] = useState({});
   useEffect(() => {
     fetch(
-      "https://api.covid19api.com/world?from=2021-03-01T00:00:00Z&to=2021-04-01T00:00:00Z"
+      "https://api.covid19api.com/world?from=2021-06-10T00:00:00Z&to=2021-06-18T00:00:00Z"
     )
       .then((res) => res.json())
       .then((res) => setDataState(createDataSetForCharts(res)))
@@ -20,29 +22,27 @@ function App() {
   }, []);
   const options = {
     responsive: true,
-    parsing: { yAxisKey: "custom" }, // this with parsing so migh use custom objects
+    // parsing: { xAxisKey: "custom" }, // this with parsing so migh use custom objects
     scales: {
       x: {
         type: "time",
         time: {
-          tooltipFormat: "MMM Do YY",
+          tooltipFormat: "MMM Do",
           displayFormats: {
-            quarter: "MMM Do YY",
+            hour: "MMM Do HH:mm",
           },
         },
         display: true,
         title: {
           display: true,
-          text: "Date",
+          text: "Date 2021",
         },
       },
     },
 
     plugins: {
       legend: {
-        onHover: function (e) {
-          e.target.style.cursor = "pointer";
-        },
+        onHover: function (e) {},
       },
       tooltip: {
         external: (context) => {
@@ -63,7 +63,7 @@ function App() {
     return <p>Loading</p>;
   }
   return (
-    <div className="App" style={{ height: "200px", width: "50%" }}>
+    <div className="App" style={{ height: "200px", width: "500px" }}>
       <Bar
         data={dataState}
         width={150}
@@ -71,6 +71,7 @@ function App() {
         options={options}
         getElementsAtEvent={(e) => console.log(e)}
       />
+      <DailyChart test="testclass" />
     </div>
   );
 }

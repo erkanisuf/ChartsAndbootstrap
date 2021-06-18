@@ -11,7 +11,7 @@ export const CustomTooltop = (context) => {
 
     document.body.appendChild(tooltipEl);
   }
-  console.log(context.tooltip.dataPoints[0].raw); // if custom obj with cusotm data
+  // console.log(context.tooltip.dataPoints[0].raw); // if custom obj with cusotm data
   // Hide if no tooltip
   let tooltipModel = context.tooltip;
   if (tooltipModel.opacity === 0) {
@@ -51,8 +51,8 @@ export const CustomTooltop = (context) => {
       style += "; border-width: 2px";
       let span = '<span style="' + style + '"></span>';
       innerHtml += "<tr><td>" + span + body + "</td></tr>";
-      innerHtml +=
-        "<tr><td>" + span + someExampleFunctionMayBe(context) + "</td></tr>";
+      // innerHtml +=
+      //   "<tr><td>" + span + someExampleFunctionMayBe(context) + "</td></tr>";
     });
     innerHtml += "</tbody>";
 
