@@ -63,15 +63,23 @@ function App() {
     return <p>Loading</p>;
   }
   return (
-    <div className="App" style={{ height: "200px", width: "500px" }}>
-      <Bar
-        data={dataState}
-        width={150}
-        height={150}
-        options={options}
-        getElementsAtEvent={(e) => console.log(e)}
-      />
-      <DailyChart test="testclass" />
+    <div className="container fluid">
+      <div className="row justify-content-center">
+        <div className="col-6">
+          <Bar
+            data={dataState}
+            width={150}
+            height={150}
+            options={options}
+            getElementsAtEvent={(e) => console.log(e)}
+          />
+        </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-6">
+          <DailyChart test="testclass" />
+        </div>
+      </div>
     </div>
   );
 }

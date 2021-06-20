@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
+import { externalTooltipHandler } from "./ExternalTooltip";
 export default class DailyChart extends Component {
   constructor(test) {
     super();
@@ -21,17 +22,35 @@ export default class DailyChart extends Component {
     const dataset = [
       {
         label: "New Confirmed",
-        data: [{ x: "New Confirmed", y: this.state.NewConfirmed }],
+        data: [
+          {
+            x: "New Confirmed",
+            y: this.state.NewConfirmed,
+            moreinfo: { custom: "Cusotm field firs titm" },
+          },
+        ],
         backgroundColor: ["blue"],
       },
       {
         label: "New Deaths",
-        data: [{ x: "New Deaths", y: this.state.NewDeaths }],
+        data: [
+          {
+            x: "New Deaths",
+            y: this.state.NewDeaths,
+            moreinfo: { custom: "Cusotm field for this too seconditm" },
+          },
+        ],
         backgroundColor: ["red"],
       },
       {
         label: "New Recovered",
-        data: [{ x: "New Recovered", y: this.state.NewRecovered }],
+        data: [
+          {
+            x: "New Recovered",
+            y: this.state.NewRecovered,
+            moreinfo: { custom: "Cusotm three item" },
+          },
+        ],
         backgroundColor: ["green"],
       },
     ];
@@ -39,22 +58,31 @@ export default class DailyChart extends Component {
   }
 
   render() {
+    const options = {
+      plugins: {
+        tooltip: {
+          external: (custom) => externalTooltipHandler(custom),
+          enabled: false,
+          mode: "point",
+          callbacks: {
+            label: (e) => e.dataset.data[0].y,
+          },
+        },
+      },
+    };
     if (!this.state) {
       return <p>load</p>;
     }
     return (
-      <div>
-        <button onClick={this.testvam.bind(this)}>QQ</button>
-        name {this.state.name},{this.props.test}
-        <div style={{ height: "200px", width: "300px" }}>
-          <Bar
-            data={this.createDataSet.bind(this)}
-            width={150}
-            height={150}
-            getElementsAtEvent={(e) => console.log(e)}
-          />
-        </div>
-      </div>
+      <>
+        <Bar
+          data={this.createDataSet.bind(this)}
+          width={150}
+          height={130}
+          options={options}
+          getElementsAtEvent={(e) => console.log(e)}
+        />
+      </>
     );
   }
 }
