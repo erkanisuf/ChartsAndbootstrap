@@ -59,6 +59,7 @@ export default class DailyChart extends Component {
 
   render() {
     const options = {
+      scales: { x: { stacked: true }, y: { stacked: true } },
       plugins: {
         tooltip: {
           external: (custom) => externalTooltipHandler(custom),

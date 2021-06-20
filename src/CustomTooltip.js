@@ -86,6 +86,6 @@ export const CustomTooltop = (context) => {
   //   tooltipEl.style.pointerEvents = "none";
 };
 
-const someExampleFunctionMayBe = (context) => {
-  return context.tooltip.dataPoints[0].raw.x;
-};
+// const someExampleFunctionMayBe = (context) => {
+//   return context.tooltip.dataPoints[0].raw.x;
+// };

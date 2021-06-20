@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
-import { Doughnut, Line, Bar } from "react-chartjs-2";
-import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
+
 import { createDataSetForCharts } from "./HelperFunctions";
-import "chartjs-adapter-moment";
-import moment from "moment";
+import "chartjs-adapter-date-fns";
+import { fi } from "date-fns/locale";
 import { CustomTooltop } from "./CustomTooltip";
 import DailyChart from "./components/Charts/DailyChart";
+import StackedChartGraph from "./components/StackedChartGraph/StackedChartGraph";
 // Chart.defaults.plugins.tooltip = false;
 function App() {
   const [dataState, setDataState] = useState({});
@@ -20,16 +21,26 @@ function App() {
       .catch((err) => console.log(err));
     return () => {};
   }, []);
+  const today = new Date();
   const options = {
     responsive: true,
     // parsing: { xAxisKey: "custom" }, // this with parsing so migh use custom objects
     scales: {
       x: {
+        adapters: {
+          date: {
+            locale: fi,
+          },
+        },
+        stacked: false,
+
+        // max: new Date(),
+        // Date Formats https://stackoverflow.com/questions/45546558/chartjs-xaxis-time-formats-dont-change-for-days
         type: "time",
         time: {
-          tooltipFormat: "MMM Do",
+          unit: "day",
           displayFormats: {
-            hour: "MMM Do HH:mm",
+            day: "MMM dd",
           },
         },
         display: true,
@@ -37,6 +48,9 @@ function App() {
           display: true,
           text: "Date 2021",
         },
+      },
+      y: {
+        stacked: false,
       },
     },
 
@@ -66,17 +80,14 @@ function App() {
     <div className="container fluid">
       <div className="row justify-content-center">
         <div className="col-6">
-          <Bar
-            data={dataState}
-            width={150}
-            height={150}
-            options={options}
-            getElementsAtEvent={(e) => console.log(e)}
-          />
+          <StackedChartGraph />
+        </div>
+        <div className="col-6">
+          <Bar data={dataState} width={150} height={150} options={options} />
         </div>
       </div>
       <div className="row justify-content-center">
-        <div className="col-6">
+        <div className="col">
           <DailyChart test="testclass" />
         </div>
       </div>

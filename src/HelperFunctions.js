@@ -9,7 +9,7 @@ export const createDataSetForCharts = (data) => {
       labels.push(el.Date);
       newConfirmed.push(confirmed);
       newDeaths.push(deaths);
-      return;
+      return "";
     });
   }
   const dataset = {

@@ -57,8 +57,6 @@ export const externalTooltipHandler = (context) => {
 
     const tableBody = document.createElement("div");
     bodyLines.forEach((body, i) => {
-      const colors = tooltip.labelColors[i];
-
       const tr = document.createElement("tr");
       tr.style.backgroundColor = "inherit";
       tr.style.borderWidth = 0;
@@ -97,7 +95,7 @@ export const externalTooltipHandler = (context) => {
 
     const mainDIV = document.querySelector(".mainDIV");
     console.log(mainDIV.lastChild);
-    if (mainDIV.lastChild.tagName == "DIV") {
+    if (mainDIV.lastChild.tagName === "DIV") {
       mainDIV.lastChild.remove();
     }
     mainDIV.appendChild(divEl);
