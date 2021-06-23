@@ -102,7 +102,7 @@ const labelMonths = (config) => {
 
   return values;
 };
-export default labelMonths;
+
 const COLORS = [
   "#4dc9f6",
   "#f67019",

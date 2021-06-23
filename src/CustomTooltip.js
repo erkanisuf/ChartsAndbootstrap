@@ -1,4 +1,4 @@
-export const CustomTooltop = (context) => {
+export const CustomTooltop = async (context) => {
   console.log(context);
   // Tooltip Element
   let tooltipEl = document.getElementById("chartjs-tooltip");
@@ -39,18 +39,27 @@ export const CustomTooltop = (context) => {
 
     let innerHtml = "<thead>";
 
-    titleLines.forEach(function (title) {
+    titleLines.forEach(async function (title) {
       innerHtml += "<tr><th>" + title + "</th></tr>";
+      innerHtml += "<tr><th>" + "WTF WE MAn" + "</th></tr>";
+      const itemZ = await startFetch();
+      if (itemZ.length) {
+        innerHtml +=
+          "<tr><th>" + itemZ[0].NewConfirmed.toString() + "</th></tr>";
+      }
+
+      console.log(itemZ.length);
     });
     innerHtml += "</thead><tbody>";
 
-    bodyLines.forEach(function (body, i) {
+    bodyLines.forEach(async function (body, i) {
       let colors = tooltipModel.labelColors[i];
       let style = "background:" + colors.backgroundColor;
       style += "; border-color:" + colors.borderColor;
       style += "; border-width: 2px";
       let span = '<span style="' + style + '"></span>';
       innerHtml += "<tr><td>" + span + body + "</td></tr>";
+
       // innerHtml +=
       //   "<tr><td>" + span + someExampleFunctionMayBe(context) + "</td></tr>";
     });
@@ -73,13 +82,7 @@ export const CustomTooltop = (context) => {
   tooltipEl.style.left =
     position.left + window.pageXOffset + tooltipModel.caretX + "px";
   tooltipEl.style.top =
-    tooltipModel.caretY < 150
-      ? position.top +
-        window.pageYOffset +
-        tooltipModel.caretY +
-        tooltipModel.caretY / 2 +
-        "px"
-      : position.top + window.pageYOffset + tooltipModel.caretY + "px";
+    position.top + window.pageYOffset + tooltipModel.caretY + "px";
 
   tooltipEl.style.padding =
     tooltipModel.padding + "px " + tooltipModel.padding + "px";
@@ -89,3 +92,12 @@ export const CustomTooltop = (context) => {
 // const someExampleFunctionMayBe = (context) => {
 //   return context.tooltip.dataPoints[0].raw.x;
 // };
+
+const startFetch = () => {
+  return fetch(
+    "https://api.covid19api.com/world?from=2021-06-10T00:00:00Z&to=2021-06-18T00:00:00Z"
+  )
+    .then((res) => res.json())
+    .then((res) => res)
+    .catch((err) => console.log(err));
+};

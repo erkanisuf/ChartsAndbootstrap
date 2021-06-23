@@ -17,13 +17,13 @@ export const createDataSetForCharts = (data) => {
       {
         label: "New Confirmed",
         data: newConfirmed,
-        backgroundColor: ["yellow"],
+        backgroundColor: ["yellow", "green", "blue"],
         borderColor: ["yellow"],
       },
       {
         label: "New Deaths",
         data: newDeaths,
-        backgroundColor: ["red"],
+        backgroundColor: ["yellow", "green", "blue"],
         borderColor: ["red"],
       },
     ],

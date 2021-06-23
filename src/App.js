@@ -24,6 +24,7 @@ function App() {
   const today = new Date();
   const options = {
     responsive: true,
+    barThickness: 25,
     // parsing: { xAxisKey: "custom" }, // this with parsing so migh use custom objects
     scales: {
       x: {
@@ -55,9 +56,6 @@ function App() {
     },
 
     plugins: {
-      legend: {
-        onHover: function (e) {},
-      },
       tooltip: {
         external: (context) => {
           CustomTooltop(context);
@@ -87,7 +85,7 @@ function App() {
         </div>
       </div>
       <div className="row justify-content-center">
-        <div className="col">
+        <div className="col-6">
           <DailyChart test="testclass" />
         </div>
       </div>
