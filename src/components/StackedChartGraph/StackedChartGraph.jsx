@@ -64,6 +64,9 @@ const StackedChartGraph = () => {
     },
     plugins: {
       tooltip: {
+        callbacks: {
+          label: (item, all) => "asd" + item.label,
+        },
         enabled: true,
         mode: "point",
       },

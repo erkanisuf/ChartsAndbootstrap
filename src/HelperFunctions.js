@@ -1,3 +1,5 @@
+import { labelMonths } from "./components/StackedChartGraph/Helpers";
+const labels = labelMonths({ count: 7 });
 export const createDataSetForCharts = (data) => {
   let labels = [];
   let newConfirmed = [];
@@ -13,17 +15,25 @@ export const createDataSetForCharts = (data) => {
     });
   }
   const dataset = {
+    labels: labels,
     datasets: [
       {
         label: "New Confirmed",
         data: newConfirmed,
-        backgroundColor: ["yellow", "green", "blue"],
+        backgroundColor: ["green"],
         borderColor: ["yellow"],
       },
       {
         label: "New Deaths",
         data: newDeaths,
-        backgroundColor: ["yellow", "green", "blue"],
+        backgroundColor: ["blue"],
+        borderColor: ["red"],
+      },
+      {
+        label: "Goal",
+        type: "line",
+        data: { x: labels, y: [10000, 20000, 30000, 40000, 50000] },
+        backgroundColor: ["orange"],
         borderColor: ["red"],
       },
     ],

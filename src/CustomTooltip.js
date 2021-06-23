@@ -42,13 +42,13 @@ export const CustomTooltop = async (context) => {
     titleLines.forEach(async function (title) {
       innerHtml += "<tr><th>" + title + "</th></tr>";
       innerHtml += "<tr><th>" + "WTF WE MAn" + "</th></tr>";
-      const itemZ = await startFetch();
-      if (itemZ.length) {
-        innerHtml +=
-          "<tr><th>" + itemZ[0].NewConfirmed.toString() + "</th></tr>";
-      }
+      // const itemZ = await startFetch();
+      // if (itemZ.length) {
+      //   innerHtml +=
+      //     "<tr><th>" + itemZ[0].NewConfirmed.toString() + "</th></tr>";
+      // }
 
-      console.log(itemZ.length);
+      // console.log(itemZ.length);
     });
     innerHtml += "</thead><tbody>";
 
@@ -93,11 +93,11 @@ export const CustomTooltop = async (context) => {
 //   return context.tooltip.dataPoints[0].raw.x;
 // };
 
-const startFetch = () => {
-  return fetch(
-    "https://api.covid19api.com/world?from=2021-06-10T00:00:00Z&to=2021-06-18T00:00:00Z"
-  )
-    .then((res) => res.json())
-    .then((res) => res)
-    .catch((err) => console.log(err));
-};
+// const startFetch = () => {
+//   return fetch(
+//     "https://api.covid19api.com/world?from=2021-06-10T00:00:00Z&to=2021-06-18T00:00:00Z"
+//   )
+//     .then((res) => res.json())
+//     .then((res) => res)
+//     .catch((err) => console.log(err));
+// };
